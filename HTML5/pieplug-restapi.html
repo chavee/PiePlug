@@ -1,0 +1,63 @@
+<style>
+.btn {
+  background: #6b6b6b;
+  background-image: -webkit-linear-gradient(top, #6b6b6b, #3a3b3b);
+  background-image: -moz-linear-gradient(top, #6b6b6b, #3a3b3b);
+  background-image: -ms-linear-gradient(top, #6b6b6b, #3a3b3b);
+  background-image: -o-linear-gradient(top, #6b6b6b, #3a3b3b);
+  background-image: linear-gradient(to bottom, #6b6b6b, #3a3b3b);
+  -webkit-border-radius: 13;
+  -moz-border-radius: 13;
+  border-radius: 13px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #a0a2a3;
+  background-image: -webkit-linear-gradient(top, #a0a2a3, #6b6a6b);
+  background-image: -moz-linear-gradient(top, #a0a2a3, #6b6a6b);
+  background-image: -ms-linear-gradient(top, #a0a2a3, #6b6a6b);
+  background-image: -o-linear-gradient(top, #a0a2a3, #6b6a6b);
+  background-image: linear-gradient(to bottom, #a0a2a3, #6b6a6b);
+  text-decoration: none;
+}
+</style>
+<script>
+
+  var a = location.hash.substring(1).split(':');
+  if (a.length==3) {
+      APPID = a[0];
+      APPKEY = a[1];
+      APPSECRET = a[2];
+  }
+  else {
+      alert("Please inclde APPID:APPKEY:APPSECRET as a url hash e.g. :\n\n index.html#APPID:APPKEY:APPSECRET");            
+  }
+
+	var url='';
+  var address = 'https://api.netpie.io';
+//  var address = 'https://chavm';
+	function switchPressoff(){
+               url=address+'/topic/'+APPID+ '/gearname/pieplug?retain&auth='+APPKEY+':'+APPSECRET;
+ 		   		var xmlHttp = new XMLHttpRequest();
+				xmlHttp.open('PUT',url,true); 
+				xmlHttp.send('0');
+			}	
+	function switchPresson(){
+               url=address+'/topic/'+APPID+ '/gearname/pieplug?retain&auth='+APPKEY+':'+APPSECRET;
+ 		   	 	var xmlHttp = new XMLHttpRequest();
+				xmlHttp.open('PUT',url,true); 
+				 xmlHttp.send('1');
+		}
+</script>
+
+<center>
+<div style="margin-top:30px;margin-left:10px;">
+<button onclick="switchPresson()"  id="Button1" class="btn">SW_ON</button>
+<button onclick="switchPressoff()" id="Button2" class="btn">SW_OFF</button>
+</div>
+</center>
